@@ -4,6 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuestFormActivity">
+    android:padding="16dp"
+    tools:context=".view.GuestFormActivity">
+
+    <TextView
+        android:id="@+id/text_nome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nome"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_nome" />
+
+    <TextView
+        android:id="@+id/text_confimacao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/confirma_o"
+        app:layout_constraintTop_toBottomOf="@+id/edit_nome"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <RadioGroup
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_confimacao">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/presente" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:text="Ausente" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/salvar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

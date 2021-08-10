@@ -1,4 +1,4 @@
-package com.example.guests.ui.gallery
+package com.example.guests.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.guests.databinding.FragmentGalleryBinding
+import com.example.guests.viewmodel.PresentViewModel
 
 class PresentFragment : Fragment() {
 
