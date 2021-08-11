@@ -13,7 +13,7 @@ class GuestDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+
     }
     companion object{
         private const val DATABASE_VERSION = 1
