@@ -87,9 +87,6 @@ class GuestRepository private constructor(context: Context) {
                 DataBaseConstants.GUEST.COLUMNS.NAME,
                 DataBaseConstants.GUEST.COLUMNS.PRESENCE
             )
-            val selection = DataBaseConstants.GUEST.COLUMNS.ID + " = ?"
-            val args = arrayOf(id.toString())
-
             val cursor = db.query(
                 DataBaseConstants.GUEST.TABLE_NAME,
                 projection,
@@ -112,16 +109,12 @@ class GuestRepository private constructor(context: Context) {
                     val guest = GuestModel(id, name, presence)
                     list.add(guest)
                 }
-
-
             }
             cursor?.close()
             list
         } catch (e: Exception) {
             list
         }
-
-
     }
 
     fun getPresent(): List<GuestModel> {
@@ -144,15 +137,12 @@ class GuestRepository private constructor(context: Context) {
                     val guest = GuestModel(id, name, presence)
                     list.add(guest)
                 }
-
-
             }
             cursor?.close()
             list
         } catch (e: Exception) {
             list
         }
-
     }
 
     fun getAbsent(): List<GuestModel> {
@@ -175,8 +165,6 @@ class GuestRepository private constructor(context: Context) {
                     val guest = GuestModel(id, name, presence)
                     list.add(guest)
                 }
-
-
             }
             cursor?.close()
             list
@@ -184,9 +172,6 @@ class GuestRepository private constructor(context: Context) {
             list
         }
     }
-
-    // CRUD
-
 
     fun update(guest: GuestModel): Boolean {
         return try {

@@ -34,7 +34,6 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
     private fun setListeners() {
         button_save.setOnClickListener(this)
     }
@@ -46,6 +45,7 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
             }else{
                 Toast.makeText(applicationContext, "Falha ao salvar", Toast.LENGTH_SHORT).show()
             }
+            finish()
         })
     }
 }
