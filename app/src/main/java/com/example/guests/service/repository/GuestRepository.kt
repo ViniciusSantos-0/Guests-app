@@ -53,7 +53,7 @@ class GuestRepository private constructor(context: Context) {
                 val presence =
                     (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
 
-                GuestModel(id, name, presence)
+               guest = GuestModel(id, name, presence)
 
             }
             cursor?.close()
