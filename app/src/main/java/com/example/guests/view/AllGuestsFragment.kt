@@ -36,8 +36,6 @@ class AllGuestsFragment : Fragment() {
         // 3 - Definir um adapter
         recycler.adapter = mAdapter
 
-
-
         mListener = object : GuestListener{
             override fun onClick(id: Int){
 
@@ -47,6 +45,10 @@ class AllGuestsFragment : Fragment() {
                 bundle.putInt(GuestConstants.GUESTID,id)
 
                 startActivity( intent.putExtras(bundle))
+            }
+            override fun onDelete(id:Int){
+                allGuestsViewModel.delete(id)
+                allGuestsViewModel.load()
             }
         }
         mAdapter.attachListener(mListener)
