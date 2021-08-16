@@ -9,9 +9,10 @@ import androidx.lifecycle.ViewModel
 import com.example.guests.service.model.GuestModel
 import com.example.guests.service.repository.GuestRepository
 
-class GuestFormViewModel(application: Application): AndroidViewModel(application) {
+class GuestFormViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val mGuestRepository: GuestRepository = GuestRepository.getInstance(application.applicationContext)
+    private val mGuestRepository: GuestRepository =
+        GuestRepository.getInstance(application.applicationContext)
 
     private var mSaveGuest = MutableLiveData<Boolean>()
     val saveGuest: LiveData<Boolean> = mSaveGuest
@@ -19,15 +20,16 @@ class GuestFormViewModel(application: Application): AndroidViewModel(application
     private var mGuest = MutableLiveData<GuestModel>()
     val guest: LiveData<GuestModel> = mGuest
 
-    fun save(id:Int, name: String, presence: Boolean){
-        val guest = GuestModel(id, name,  presence)
-        if(id == 0) {
+    fun save(id: Int, name: String, presence: Boolean) {
+        val guest = GuestModel(id, name, presence)
+        if (id == 0) {
             mSaveGuest.value = mGuestRepository.save(guest)
-        }else {
+        } else {
             mSaveGuest.value = mGuestRepository.update(guest)
         }
     }
-    fun load(id:Int){
+
+    fun load(id: Int) {
         mGuest.value = mGuestRepository.get(id)
     }
 }

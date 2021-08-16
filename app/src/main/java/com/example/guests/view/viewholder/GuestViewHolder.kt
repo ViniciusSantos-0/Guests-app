@@ -8,24 +8,25 @@ import com.example.guests.R
 import com.example.guests.service.model.GuestModel
 import com.example.guests.view.listener.GuestListener
 
-class GuestViewHolder(itemView: View, private val listener: GuestListener): RecyclerView.ViewHolder(itemView) {
+class GuestViewHolder(itemView: View, private val listener: GuestListener) :
+    RecyclerView.ViewHolder(itemView) {
 
-    fun bind (guest: GuestModel){
-      val textName =  itemView.findViewById<TextView>(R.id.text_name)
+    fun bind(guest: GuestModel) {
+        val textName = itemView.findViewById<TextView>(R.id.text_name)
         textName.text = guest.name
 
-        textName.setOnClickListener{
+        textName.setOnClickListener {
             listener.onClick(guest.id)
         }
-        textName.setOnLongClickListener{
+        textName.setOnLongClickListener {
+            //função de alerta do android,
             AlertDialog.Builder(itemView.context).setTitle(R.string.remocao_convidado)
                 .setMessage(R.string.deseja_remover)
-                .setPositiveButton(R.string.remover) {dialog, which ->
+                .setPositiveButton(R.string.remover) { dialog, which ->
                     listener.onDelete(guest.id)
                 }
                 .setNeutralButton(R.string.cancelar, null).show()
             true
         }
     }
-
 }

@@ -14,16 +14,20 @@ import com.example.guests.databinding.FragmentAllBinding
 import com.example.guests.service.constants.GuestConstants
 import com.example.guests.view.adapter.GuestAdapter
 import com.example.guests.view.listener.GuestListener
-import com.example.guests.viewmodel.AllGuestsViewModel
+import com.example.guests.viewmodel.GuestsViewModel
 
 class AllGuestsFragment : Fragment() {
 
-    private lateinit var allGuestsViewModel: AllGuestsViewModel
+    private lateinit var allGuestsViewModel: GuestsViewModel
     private val mAdapter: GuestAdapter = GuestAdapter()
     private lateinit var mListener: GuestListener
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        allGuestsViewModel = ViewModelProvider(this).get(AllGuestsViewModel::class.java)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        allGuestsViewModel = ViewModelProvider(this).get(GuestsViewModel::class.java)
 
         val binding = FragmentAllBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -36,19 +40,20 @@ class AllGuestsFragment : Fragment() {
         // 3 - Definir um adapter
         recycler.adapter = mAdapter
 
-        mListener = object : GuestListener{
-            override fun onClick(id: Int){
+        mListener = object : GuestListener {
+            override fun onClick(id: Int) {
 
                 val intent = Intent(context, GuestFormActivity::class.java)
 
                 val bundle = Bundle()
-                bundle.putInt(GuestConstants.GUESTID,id)
+                bundle.putInt(GuestConstants.GUESTID, id)
 
-                startActivity( intent.putExtras(bundle))
+                startActivity(intent.putExtras(bundle))
             }
-            override fun onDelete(id:Int){
+
+            override fun onDelete(id: Int) {
                 allGuestsViewModel.delete(id)
-                allGuestsViewModel.load()
+                allGuestsViewModel.load(GuestConstants.Companion.FILTER.EMPTY)
             }
         }
         mAdapter.attachListener(mListener)
@@ -58,13 +63,14 @@ class AllGuestsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        allGuestsViewModel.load()
+        allGuestsViewModel.load(GuestConstants.Companion.FILTER.EMPTY)
     }
-    private fun observer(){
+
+    private fun observer() {
         allGuestsViewModel.guestList.observe(viewLifecycleOwner, {
             mAdapter.updateGuests(it)
         })
     }
 
-  
+
 }

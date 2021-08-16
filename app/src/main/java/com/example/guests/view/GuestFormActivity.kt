@@ -26,6 +26,7 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
         loadData()
         radio_presence.isChecked = true
     }
+
     override fun onClick(v: View) {
         val id = v.id
         if (edit_name.text.toString().equals("")) {
@@ -34,37 +35,38 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
             val name = edit_name.text.toString()
             val presence = radio_presence.isChecked
 
-                mViewModel.save(mGuestId, name, presence)
-
+            mViewModel.save(mGuestId, name, presence)
         }
     }
-private fun loadData() {
-    val bundle = intent.extras
-    if (bundle != null) {
-        mGuestId = bundle.getInt(GuestConstants.GUESTID)
-        mViewModel.load(mGuestId)
-    }
-}
 
-private fun observe() {
-    mViewModel.saveGuest.observe(this, {
-        if (it) {
-            Toast.makeText(applicationContext, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(applicationContext, "Falha ao salvar", Toast.LENGTH_SHORT).show()
+    private fun loadData() {
+        val bundle = intent.extras
+        if (bundle != null) {
+            mGuestId = bundle.getInt(GuestConstants.GUESTID)
+            mViewModel.load(mGuestId)
         }
-        finish()
-    })
-    mViewModel.guest.observe(this, Observer {
-        edit_name.setText(it.name)
-        if (it.presence) {
-            radio_presence.isChecked = true
-        } else {
-            radio_absent.isChecked = true
-        }
-    })
-}
-private fun setListeners() {
-    button_save.setOnClickListener(this)
-}
+    }
+
+    private fun observe() {
+        mViewModel.saveGuest.observe(this, {
+            if (it) {
+                Toast.makeText(applicationContext, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "Falha ao salvar", Toast.LENGTH_SHORT).show()
+            }
+            finish()
+        })
+        mViewModel.guest.observe(this, Observer {
+            edit_name.setText(it.name)
+            if (it.presence) {
+                radio_presence.isChecked = true
+            } else {
+                radio_absent.isChecked = true
+            }
+        })
+    }
+
+    private fun setListeners() {
+        button_save.setOnClickListener(this)
+    }
 }

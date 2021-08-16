@@ -7,7 +7,6 @@ import com.example.guests.service.model.GuestModel
 
 class GuestRepository private constructor(context: Context) {
 
-
     //Singleton
     private var mGuestDataBaseHelper: GuestDataBaseHelper = GuestDataBaseHelper(context)
 
@@ -53,15 +52,13 @@ class GuestRepository private constructor(context: Context) {
                 val presence =
                     (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
 
-               guest = GuestModel(id, name, presence)
-
+                guest = GuestModel(id, name, presence)
             }
             cursor?.close()
             guest
         } catch (e: Exception) {
             guest
         }
-
     }
 
     fun save(guest: GuestModel): Boolean {
@@ -151,7 +148,7 @@ class GuestRepository private constructor(context: Context) {
             val db = mGuestDataBaseHelper.readableDatabase
 
             val cursor =
-                db.rawQuery("SELECT id, name, presence FROM guest WHERE presence = 1", null)
+                db.rawQuery("SELECT id, name, presence FROM guest WHERE presence = 0", null)
 
             if (cursor != null && cursor.count > 0) {
                 while (cursor.moveToNext()) {
